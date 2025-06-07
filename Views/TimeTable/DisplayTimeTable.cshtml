@@ -1,0 +1,52 @@
+﻿@model List<List<string>>
+
+@{
+    ViewData["Title"] = "Generated Time Table";
+    int days = Model.FirstOrDefault()?.Count ?? 0;
+    int periods = Model.Count;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">Generated Time Table</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="width: 10%">Period/Day</th>
+                                    @for (int day = 1; day <= days; day++)
+                                    {
+                                        <th>Day @day</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int period = 0; period < periods; period++)
+                                {
+                                    <tr>
+                                        <th class="bg-light">Period @(period + 1)</th>
+                                        @foreach (var subject in Model[period])
+                                        {
+                                            <td class="@(subject == "Free" ? "text-muted" : "")">@subject</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Index" class="btn btn-primary">
+                            <i class="fas fa-redo"></i> Generate Another
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
