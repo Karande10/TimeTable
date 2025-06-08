@@ -6,6 +6,7 @@ namespace TimeTable.Models.ViewModels
     {
         [Required(ErrorMessage = "Subject name is required")]
         [StringLength(50, ErrorMessage = "Maximum 50 characters")]
+        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Subject name should only contain letters and spaces")]
         [Display(Name = "Subject Name")]
         public string Name { get; set; }
 
